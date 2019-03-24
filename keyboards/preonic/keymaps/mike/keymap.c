@@ -20,6 +20,11 @@
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
 #define KC_LCAG LCAG_T(XXXXXXX)
+#define CTL_ESC LCTL_T(KC_ESC)
+#define ALT_TAB LALT_T(KC_TAB)
+#define SFT_GRV LSFT_T(KC_GRV)
+#define KC_LSQB S(KC_LBRC)
+#define KC_RSQB S(KC_RBRC)
 
 enum preonic_layers {
   _COLEMAK,
@@ -44,103 +49,103 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |  `   |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |   -  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Tab  |   Q  |   W  |   F  |   P  |   G  |   J  |   L  |   U  |   Y  |   ;  | Bksp |
+ * |AltTab|   Q  |   W  |   F  |   P  |   G  |   J  |   L  |   U  |   Y  |   ;  | Bksp |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Esc  |   A  |   R  |   S  |   T  |   D  |   H  |   N  |   E  |   I  |   O  |   "  |
+ * |CtlEsc|   A  |   R  |   S  |   T  |   D  |   H  |   N  |   E  |   I  |   O  |   "  |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Alt  |   Z  |   X  |   C  |   V  |   B  |   K  |   M  |   ,  |   .  |   /  |Enter |
+ * |SftGrv|   Z  |   X  |   C  |   V  |   B  |   K  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |   `  | Ctrl | Alt  | GUI  |Lower | Entr | Spce |Raise | Left | Down |  Up  |Right |
+ * | CAG  | Ctrl | Alt  | GUI  | Shft |Lower |Raise | Spce | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_COLEMAK] = {
-  {KC_GRV,          KC_1,    KC_2,    KC_3,    KC_4,    KC_5,   KC_6,   KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS},
-  {KC_TAB,  	   	KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,   KC_J,   KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC},
-  {LCTL_T(KC_ESC),  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,   KC_H,   KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT},
-  {KC_LALT, 		KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_K,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
-  {KC_LCAG,  		KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, LOWER,  RAISE,  KC_SPC,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  {KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,   KC_6,   KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS},
+  {ALT_TAB, KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,   KC_J,   KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC},
+  {CTL_ESC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,   KC_H,   KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT},
+  {SFT_GRV,	KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_K,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
+  {KC_LCAG,	KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, LOWER,  RAISE,  KC_SPC,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
 },
 
 /* Qwerty
  * ,-----------------------------------------------------------------------------------.
  * |  `   |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |   -  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Del  |
+ * |AltTab|   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Del  |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Esc  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  "   |
+ * |CtlEsc|   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  "   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Alt  |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
+ * |SftGrv|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |  `   | Ctrl | Alt  | GUI  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
+ * | CAG  | Ctrl | Alt  | GUI  | Shft |Lower |Raise | Spce | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = {
-  {KC_GRV,          KC_1,    KC_2,    KC_3,    KC_4,    KC_5,   KC_6,   KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS},
-  {KC_TAB,  		KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,   KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
-  {LCTL_T(KC_ESC),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,   KC_H,   KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
-  {KC_LALT, 		KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
-  {KC_LCAG,  		KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, LOWER,  RAISE,  KC_SPC,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  {KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,   KC_6,   KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS},
+  {ALT_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,   KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
+  {CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,   KC_H,   KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
+  {SFT_GRV,	KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
+  {KC_LCAG,	KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, LOWER,  RAISE,  KC_SPC,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
 },
 
 /* Colemak (Windows Mods)
  * ,-----------------------------------------------------------------------------------.
  * |  `   |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |   -  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Tab  |   Q  |   W  |   F  |   P  |   G  |   J  |   L  |   U  |   Y  |   ;  | Bksp |
+ * |AltTab|   Q  |   W  |   F  |   P  |   G  |   J  |   L  |   U  |   Y  |   ;  | Bksp |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Esc  |   A  |   R  |   S  |   T  |   D  |   H  |   N  |   E  |   I  |   O  |  "   |
+ * |CtlEsc|   A  |   R  |   S  |   T  |   D  |   H  |   N  |   E  |   I  |   O  |  "   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Alt  |   Z  |   X  |   C  |   V  |   B  |   K  |   M  |   ,  |   .  |   /  |Enter |
+ * |SftGrv|   Z  |   X  |   C  |   V  |   B  |   K  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |   `  | Ctrl | Alt  | GUI  |Lower | Entr | Spce |Raise | Left | Down |  Up  |Right |
+ * | CAG  | Ctrl | Alt  | GUI  | Shft |Lower |Raise | Spce | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_WINCMAK] = {
-  {KC_GRV,          KC_1,    KC_2,    KC_3,    KC_4,    KC_5,   KC_6,   KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS},
-  {KC_TAB,  	   	KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,   KC_J,   KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC},
-  {LCTL_T(KC_ESC),  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,   KC_H,   KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT},
-  {KC_LALT, 		KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_K,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
-  {KC_LCAG,  		KC_LCTL, KC_LGUI, KC_LALT, KC_LSFT, LOWER,  RAISE,  KC_SPC,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  {KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,   KC_6,   KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS},
+  {ALT_TAB,	KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,   KC_J,   KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC},
+  {CTL_ESC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,   KC_H,   KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT},
+  {SFT_GRV,	KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_K,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
+  {KC_LCAG,	KC_LCTL, KC_LGUI, KC_LALT, KC_LSFT, LOWER,  RAISE,  KC_SPC,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
 },
 
-/* Lower
+/* Lower - Numbers/Control
  * ,-----------------------------------------------------------------------------------.
  * |  F11 |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 | F12  |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      | HOME | PGUP |  UP  | PGDN | END  |XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX| Del  |
+ * |      |XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX| Del  |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |XXXXXX| LEFT | DOWN | RGHT |XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|  \   |
+ * |      |  1   |  2   |  3   |  4   |  5   |  6   |  7   |  8   |  9   |  0   |  \   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|      |
+ * |      | Left | Down |  Up  |Right |XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             | Prev | Next | Vol- | Vol+ | Play |
+ * |      |      |      |      |      |             |      | Prev | Stop | Play | Next |
  * `-----------------------------------------------------------------------------------'
  */
 [_LOWER] = {
-  {KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12},
-  {_______, KC_HOME, KC_PGUP, KC_UP,   KC_PGDN, KC_END,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL},
-  {_______, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSLS},
-  {_______, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______},
+  {KC_F11 , KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12},
+  {_______, S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5), S(KC_6), S(KC_7), S(KC_8), S(KC_9), S(KC_0), KC_DEL},
+  {_______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______},
+  {_______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, KC_MPRV, KC_MSTP, KC_MPLY, KC_MNXT}
 },
 
-/* Raise
+/* Raise -  Symbols/control
  * ,-----------------------------------------------------------------------------------.
  * |      |XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|  +   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | HOME | PGUP |  UP  | PGDN | END  |XXXXXX|XXXXXX|XXXXXX|  [   |   ]  | Del  |
+ * |      | HOME | PGUP |  UP  | PGDN | END  |XXXXXX|  [   |   ]  |  {   |   }  | Del  |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |XXXXXX| LEFT | DOWN | RGHT |XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|  \   |
+ * |      |XXXXXX| LEFT | DOWN | RGHT |XXXXXX|XXXXXX| Left | Down |  Up  |Right |  \   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|      |
+ * |      | MUTE | VOL- | VOL+ |XXXXXX|XXXXXX|XXXXXX|XXXXXX|Brght-|Brght+|XXXXXX|      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      | Prev | Next | Vol- | Vol+ | Play |
+ * |      |      |      |      |      |             |      | Prev | Stop | Play | Next |
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = {
   {_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_EQL},
-  {_______, KC_HOME, KC_PGUP, KC_UP,   KC_PGDN, KC_END,  XXXXXXX, XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, KC_DEL},
-  {_______, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSLS},
+  {_______, KC_HOME, KC_PGUP, KC_UP,   KC_PGDN, KC_END,  XXXXXXX, KC_LBRC, KC_RBRC, KC_LSQB, KC_RSQB, KC_DEL},
+  {_______, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_BSLS},
   {_______, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BRID, KC_BRIU, XXXXXXX, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, KC_MPRV, KC_MSTP, KC_MPLY, KC_MNXT}
 },
