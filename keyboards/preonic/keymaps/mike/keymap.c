@@ -134,23 +134,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Raise -  Symbols
  * ,-----------------------------------------------------------------------------------.
- * |      |XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|  +   |
+ * |XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | HOME | PGUP |  UP  | PGDN | END  |XXXXXX|  [   |   ]  |  {   |   }  | Del  |
+ * |      |  !   |  @   |  #   |  $   |  %   |  ^   |  &   |  *   |  (   |  )   |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |XXXXXX| LEFT | DOWN | RGHT |XXXXXX|XXXXXX| Left | Down |  Up  |Right |  \   |
+ * |      |XXXXXX|  /   |  {   |  [   |  -   |   +  |   ]  |  }   |  \   |  |   |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      | MUTE | VOL- | VOL+ |XXXXXX|XXXXXX|XXXXXX|XXXXXX|Brght-|Brght+|XXXXXX|  |   |
+ * |      |XXXXXX|XXXXXX|XXXXXX|XXXXXX|  _   |   =  |XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      | Prev | Stop | Play | Next |
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = {
-  {_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_EQL},
-  {_______, KC_HOME, KC_PGUP, KC_UP,   KC_PGDN, KC_END,  XXXXXXX, KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, KC_DEL},
-  {_______, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_BSLS},
-  {_______, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BRID, KC_BRIU, XXXXXXX, KC_PIPE},
-  {_______, _______, _______, _______, _______, _______, _______, _______, KC_MPRV, KC_MSTP, KC_MPLY, KC_MNXT}
+  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
+  {_______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______},
+  {_______, XXXXXXX, KC_SLSH, KC_LCBR, KC_LBRC, KC_MINS, KC_PLUS, KC_RBRC, KC_RCBR, KC_BSLS, KC_PIPE, _______},
+  {_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_UNDS, KC_EQL,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______},
+  {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
 
 /* SPACE - Control
