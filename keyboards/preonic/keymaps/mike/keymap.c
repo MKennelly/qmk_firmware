@@ -24,7 +24,7 @@ enum preonic_layers {
   _LOWER,
   _RAISE,
   _ADJUST,
-  _SPACE_FN,
+  _NAVI,
   _NUMBER,
   _MOUSE
 };
@@ -45,7 +45,8 @@ enum preonic_keycodes {
 #define ALT_TAB LALT_T(KC_TAB)
 #define SFT_GRV LSFT_T(KC_GRV)
 #define ENT_GUI RGUI_T(KC_ENT)
-#define SPCE_FN LT(_SPACE_FN, KC_SPC)
+#define SPCE_NV LT(_NAVI, KC_SPC)
+#define ENT_NAV LT(_NAVI, KC_ENT)
 #define NUMBER MO(_NUMBER)
 #define MOUSE MO(_MOUSE)
 
@@ -68,8 +69,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
   {ALT_TAB, KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,   KC_J,   KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC},
   {CTL_ESC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,   KC_H,   KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT},
-  {SFT_GRV,	KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_K,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, ENT_GUI},
-  {KC_LCAG,	NUMBER,  KC_LALT, KC_LGUI, KC_LSFT, LOWER,  RAISE,  SPCE_FN, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  {SFT_GRV,	KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_K,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, ENT_NAV},
+  {KC_LCAG,	NUMBER,  KC_LALT, KC_LGUI, KC_LSFT, LOWER,  RAISE,  SPCE_NV, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
 },
 
 /* Qwerty
@@ -89,8 +90,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
   {ALT_TAB, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
   {CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
-  {SFT_GRV,	KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, ENT_GUI},
-  {KC_LCAG,	NUMBER,  KC_LALT, KC_LGUI, KC_LSFT, LOWER,   RAISE,   SPCE_FN, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  {SFT_GRV,	KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, ENT_NAV},
+  {KC_LCAG,	NUMBER,  KC_LALT, KC_LGUI, KC_LSFT, LOWER,   RAISE,   SPCE_NV, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
 },
 
 /* Colemak (Windows Mods)
@@ -111,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {ALT_TAB,	KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC},
   {CTL_ESC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT},
   {SFT_GRV,	KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
-  {KC_LCAG,	NUMBER,  KC_LGUI, KC_LALT, KC_LSFT, LOWER,   RAISE,   SPCE_FN, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  {KC_LCAG,	NUMBER,  KC_LGUI, KC_LALT, KC_LSFT, LOWER,   RAISE,   SPCE_NV, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
 },
 
 /* Lower - Numbers
@@ -141,9 +142,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |  !   |  @   |  #   |  $   |  %   |  ^   |  &   |  *   |  (   |  )   |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |XXXXXX|  /   |  {   |  [   |  -   |   +  |   ]  |  }   |  \   |  |   |      |
+ * |      |XXXXXX|  /   |  {   |  [   |  -   |   =  |   ]  |  }   |  \   |  |   |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |XXXXXX|XXXXXX|XXXXXX|XXXXXX|  _   |   =  |XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|
+ * |      |XXXXXX|XXXXXX|XXXXXX|  (   |  _   |   +  |   )  |XXXXXX|XXXXXX|XXXXXX|XXXXXX|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
@@ -151,9 +152,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_RAISE] = {
   {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
   {_______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______},
-  {_______, XXXXXXX, KC_SLSH, KC_LCBR, KC_LBRC, KC_MINS, KC_PLUS, KC_RBRC, KC_RCBR, KC_BSLS, KC_PIPE, _______},
-  {_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_UNDS, KC_EQL,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______},
-  {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
+  {_______, XXXXXXX, KC_SLSH, KC_LCBR, KC_LBRC, KC_MINS, KC_EQL,  KC_RBRC, KC_RCBR, KC_BSLS, KC_PIPE, _______},
+  {_______, XXXXXXX, XXXXXXX, XXXXXXX, KC_LPRN, KC_UNDS, KC_PLUS, KC_RPRN, XXXXXXX, XXXXXXX, XXXXXXX, _______},
+  {_______, _______, _______, _______, KC_SPC,  _______, _______, _______, _______, _______, _______, _______}
 },
 
 /* SPACE - Control
@@ -169,7 +170,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |      |      |      | Prev | Play | Next | Stop |
  * `-----------------------------------------------------------------------------------'
  */
-[_SPACE_FN] = {
+[_NAVI] = {
   {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
   {_______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_PGDN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL},
   {_______, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______},
