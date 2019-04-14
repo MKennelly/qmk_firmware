@@ -14,13 +14,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include QMK_KEYBOARD_H
 #include "preonic.h"
 #include "action_layer.h"
+/* #include <sendstring_colemak.h> */
 
 enum preonic_layers {
   _COLEMAK,
   _QWERTY,
-  _WINCMAK,
   _LOWER,
   _RAISE,
   _ADJUST,
@@ -32,7 +33,6 @@ enum preonic_layers {
 enum preonic_keycodes {
   COLEMAK = SAFE_RANGE,
   QWERTY,
-  WINCMAK,
   LOWER,
   RAISE,
   BACKLIT
@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {ALT_TAB, KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,   KC_J,   KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC},
   {CTL_ESC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,   KC_H,   KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT},
   {SFT_GRV,	KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_K,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, ENT_NAV},
-  {KC_LCAG,	NUMBER,  KC_LALT, KC_LGUI, KC_LSFT, LOWER,  RAISE,  KC_SPC,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  {KC_LCAG,	NUMBER,  KC_LALT, KC_LGUI, KC_LSFT, LOWER,  RAISE,  KC_SPC,  KC_LEAD, KC_DOWN, KC_UP,   KC_RGHT}
 },
 
 /* Qwerty
@@ -91,28 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {ALT_TAB, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
   {CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
   {SFT_GRV,	KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, ENT_NAV},
-  {KC_LCAG,	NUMBER,  KC_LALT, KC_LGUI, KC_LSFT, LOWER,   RAISE,   KC_SPC,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
-},
-
-/* Colemak (Windows Mods)
- * ,-----------------------------------------------------------------------------------.
- * |  `   |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |   -  |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |AltTab|   Q  |   W  |   F  |   P  |   G  |   J  |   L  |   U  |   Y  |   ;  | Bksp |
- * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |CtlEsc|   A  |   R  |   S  |   T  |   D  |   H  |   N  |   E  |   I  |   O  |  '   |
- * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |SftGrv|   Z  |   X  |   C  |   V  |   B  |   K  |   M  |   ,  |   .  |   /  |Enter |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | CAG  | Nmbr | Alt  | GUI  | Shft |Lower |Raise | Spce | Left | Down |  Up  |Right |
- * `-----------------------------------------------------------------------------------'
- */
-[_WINCMAK] = {
-  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
-  {ALT_TAB,	KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC},
-  {CTL_ESC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT},
-  {SFT_GRV,	KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
-  {KC_LCAG,	NUMBER,  KC_LGUI, KC_LALT, KC_LSFT, LOWER,   RAISE,   KC_SPC,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  {KC_LCAG,	NUMBER,  KC_LALT, KC_LGUI, KC_LSFT, LOWER,   RAISE,   KC_SPC,  KC_LEAD, KC_DOWN, KC_UP,   KC_RGHT}
 },
 
 /* Lower - Numbers
@@ -224,42 +203,66 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |  F11 |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 | F12  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | Reset|      |      |      |      |      |      |      |      |      | Sleep|
+ * |      | Reset| Debug|      |      |      |      |      |      |      |      | Sleep|
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |      |      |Aud on|AudOff|AGnorm|AGswap|Qwerty|Colemk|Dvorak|      |      |
+ * |      |      |      |Aud on|AudOff|AGnorm|AGswap|Colemk|Qwerty|      |      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |Voice-|Voice+|Mus on|MusOff|MidiOn|MidOff|      |      |      |      |      |
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      |      |      |      |      |
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = {
   {KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12},
   {_______, RESET,   DEBUG,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TERM_ON, TERM_OFF,XXXXXXX, XXXXXXX, KC_SLEP},
-  {_______, XXXXXXX, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  COLEMAK, WINCMAK, XXXXXXX, KC_BSLS},
-  {_______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______},
+  {_______, XXXXXXX, XXXXXXX, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, COLEMAK, QWERTY,  XXXXXXX, XXXXXXX, _______},
+  {_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 }
+};
 
+LEADER_EXTERNS();
+
+void matrix_scan_user(void) {
+  LEADER_DICTIONARY() {
+    leading = false;
+    leader_end();
+
+    SEQ_ONE_KEY(KC_T) {
+      SEND_STRING(SS_LGUI(SS_LSFT("t")));
+    }
+    SEQ_ONE_KEY(KC_P) {
+      SEND_STRING(SS_LGUI(SS_LSFT("p")));
+    }
+    SEQ_ONE_KEY(KC_N) {
+      SEND_STRING(SS_LGUI(SS_LSFT("n")));
+    }
+    SEQ_ONE_KEY(KC_D) {
+      SEND_STRING(SS_LGUI("l")SS_LGUI(SS_LSFT(SS_TAP(X_ENTER))));
+    }
+    SEQ_ONE_KEY(KC_S) {
+      SEND_STRING(SS_LGUI(SS_LSFT("4")));
+    }
+    SEQ_TWO_KEYS(KC_S, KC_F) {
+      SEND_STRING(SS_LGUI(SS_LSFT("3")));
+    }
+    SEQ_TWO_KEYS(KC_S, KC_C) {
+      SEND_STRING(SS_LGUI(SS_LSFT("5")));
+    }
+  }
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-        case QWERTY:
-          if (record->event.pressed) {
-            set_single_persistent_default_layer(_QWERTY);
-          }
-          return false;
-          break;
         case COLEMAK:
           if (record->event.pressed) {
             set_single_persistent_default_layer(_COLEMAK);
           }
           return false;
           break;
-        case WINCMAK:
+        case QWERTY:
           if (record->event.pressed) {
-            set_single_persistent_default_layer(_WINCMAK);
+            set_single_persistent_default_layer(_QWERTY);
           }
           return false;
           break;
@@ -280,19 +283,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           } else {
             layer_off(_RAISE);
             update_tri_layer(_LOWER, _RAISE, _ADJUST);
-          }
-          return false;
-          break;
-        case BACKLIT:
-          if (record->event.pressed) {
-            register_code(KC_RSFT);
-            #ifdef BACKLIGHT_ENABLE
-              backlight_step();
-            #endif
-            PORTE &= ~(1<<6);
-          } else {
-            unregister_code(KC_RSFT);
-            PORTE |= (1<<6);
           }
           return false;
           break;
