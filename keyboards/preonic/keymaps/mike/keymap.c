@@ -35,7 +35,8 @@ enum preonic_keycodes {
   QWERTY,
   LOWER,
   RAISE,
-  BACKLIT
+  FAT_ARW,
+  SLM_ARW,
 };
 
 #define _______ KC_TRNS
@@ -45,7 +46,7 @@ enum preonic_keycodes {
 #define ALT_TAB LALT_T(KC_TAB)
 #define SFT_GRV LSFT_T(KC_GRV)
 #define ENT_GUI RGUI_T(KC_ENT)
-#define SPCE_NV LT(_NAVI, KC_SPC)
+#define SPC_NAV LT(_NAVI, KC_SPC)
 #define ENT_NAV LT(_NAVI, KC_ENT)
 #define NUMBER MO(_NUMBER)
 #define MOUSE MO(_MOUSE)
@@ -70,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {ALT_TAB, KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,   KC_J,   KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC},
   {CTL_ESC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,   KC_H,   KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT},
   {SFT_GRV,	KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_K,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, ENT_NAV},
-  {KC_LCAG,	NUMBER,  KC_LALT, KC_LGUI, KC_LSFT, LOWER,  RAISE,  KC_SPC,  KC_LEAD, KC_DOWN, KC_UP,   KC_RGHT}
+  {KC_LCAG,	NUMBER,  KC_LALT, KC_LGUI, KC_LSFT, LOWER,  RAISE,  SPC_NAV, KC_LEAD, KC_DOWN, KC_UP,   KC_RGHT}
 },
 
 /* Qwerty
@@ -91,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {ALT_TAB, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
   {CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
   {SFT_GRV,	KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, ENT_NAV},
-  {KC_LCAG,	NUMBER,  KC_LALT, KC_LGUI, KC_LSFT, LOWER,   RAISE,   KC_SPC,  KC_LEAD, KC_DOWN, KC_UP,   KC_RGHT}
+  {KC_LCAG,	NUMBER,  KC_LALT, KC_LGUI, KC_LSFT, LOWER,   RAISE,   SPC_NAV, KC_LEAD, KC_DOWN, KC_UP,   KC_RGHT}
 },
 
 /* Lower - Numbers
@@ -132,11 +133,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
   {_______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______},
   {_______, XXXXXXX, KC_SLSH, KC_LCBR, KC_LBRC, KC_MINS, KC_EQL,  KC_RBRC, KC_RCBR, KC_BSLS, KC_PIPE, _______},
-  {_______, XXXXXXX, XXXXXXX, XXXXXXX, KC_LPRN, KC_UNDS, KC_PLUS, KC_RPRN, KC_LABK, KC_RABK, XXXXXXX, _______},
+  {_______, XXXXXXX, XXXXXXX, XXXXXXX, KC_LPRN, KC_UNDS, KC_PLUS, KC_RPRN, SLM_ARW, FAT_ARW, XXXXXXX, _______},
   {_______, _______, _______, _______, KC_SPC,  _______, _______, _______, _______, _______, _______, _______}
 },
 
-/* SPACE - Control
+/* NAVI - Control/nav
  * ,-----------------------------------------------------------------------------------.
  * |XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -246,7 +247,7 @@ void matrix_scan_user(void) {
     SEQ_TWO_KEYS(KC_S, KC_F) {
       SEND_STRING(SS_LGUI(SS_LSFT("3")));
     }
-    SEQ_TWO_KEYS(KC_S, KC_C) {
+    SEQ_TWO_KEYS(KC_S, KC_S) {
       SEND_STRING(SS_LGUI(SS_LSFT("5")));
     }
   }
@@ -254,38 +255,50 @@ void matrix_scan_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-        case COLEMAK:
-          if (record->event.pressed) {
-            set_single_persistent_default_layer(_COLEMAK);
-          }
-          return false;
-          break;
-        case QWERTY:
-          if (record->event.pressed) {
-            set_single_persistent_default_layer(_QWERTY);
-          }
-          return false;
-          break;
-        case LOWER:
-          if (record->event.pressed) {
-            layer_on(_LOWER);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-          } else {
-            layer_off(_LOWER);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-          }
-          return false;
-          break;
-        case RAISE:
-          if (record->event.pressed) {
-            layer_on(_RAISE);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-          } else {
-            layer_off(_RAISE);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-          }
-          return false;
-          break;
+    case COLEMAK:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(_COLEMAK);
       }
-    return true;
+      return false;
+      break;
+    case QWERTY:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(_QWERTY);
+      }
+      return false;
+      break;
+    case LOWER:
+      if (record->event.pressed) {
+        layer_on(_LOWER);
+        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+      } else {
+        layer_off(_LOWER);
+        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+      }
+      return false;
+      break;
+    case RAISE:
+      if (record->event.pressed) {
+        layer_on(_RAISE);
+        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+      } else {
+        layer_off(_RAISE);
+        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+      }
+      return false;
+      break;
+    case FAT_ARW:
+      if (record->event.pressed) {
+        SEND_STRING("=> ");
+      }
+      return false;
+      break;
+    case SLM_ARW:
+      if (record->event.pressed) {
+        SEND_STRING("-> ");
+      }
+      return false;
+      break;
+  }
+  return true;
 };
