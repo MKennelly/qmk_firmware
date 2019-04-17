@@ -1,40 +1,18 @@
 #include "s60_x.h"
 
-/*
- * MK
- */
+enum s60_layers {
+  _COLEMAK,
+  _QWERTY,
+  _FN,
+  _MOUSE,
+  _ADJUST
+}
+
 #define _______ KC_TRNS
-//Define Layers
-#define _CW 0 // default layer - colemak win/linux
-#define _CM 1 // default layer - colemak mac
-#define _QM 2 // qwerty mac
-#define _QW 3 // qwerty win
-#define _FN 4 // function layer
-#define _MS 5 // mouse layer
-#define _SL 6 // layer shift
+#define XXXXXXX KC_NO
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /* Keymap 0: Colemak Win Mods
-┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
-│GRAVE│  1  │  2  │  3  │  4  │  5  │  6  │  7  │  8  │  9  │  0  │  -  │  =  │▒▒▒▒▒│BKSPC│
-├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-│ TAB │  Q  │  W  │  F  │  P  │  G  │  J  │  L  │  U  │  Y  │  ;  │  [  │  ]  │  \  │█████│
-├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-│BKSPC│  A  │  R  │  S  │  T  │  D  │  H  │  N  │  E  │  I  │  O  │  '  │▒▒▒▒▒│ENTER│█████│
-├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-│LSHFT│▒▒▒▒▒│  Z  │  X  │  C  │  V  │  B  │  K  │  M  │  ,  │  .  │  /  │▒▒▒▒▒│RSHFT│▒▒▒▒▒│
-├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-│LCTRL│L_WIN│L_ALT│█████│█████│█████│ SPC │█████│█████│█████│R_ALT│R_WIN│Mouse│ FNW │█████│
-└─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
-    */
-    [_CW] = KEYMAP(
-        KC_GRV,  		KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_NO,   KC_BSPC, \
-        KC_TAB,  		KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_LBRC, KC_RBRC, KC_BSLS,          \
-        LCTL_T(KC_ESC), KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT, KC_NO,   KC_ENT,           \
-        KC_LSFT, 		KC_NO,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_NO,   KC_RSFT, KC_NO,   \
-        KC_LCTL, 		KC_LGUI, KC_LALT,                            KC_SPC,                             KC_RALT, KC_RGUI, MO(5),   MO(4)),
-
-    /* Keymap 1: Colemak Mac Mods
+    /* Colemak Mac Mods
 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
 │ ESC │  1  │  2  │  3  │  4  │  5  │  6  │  7  │  8  │  9  │  0  │  -  │  =  │▒▒▒▒▒│BKSPC│
 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
@@ -47,14 +25,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 │LCTRL│L_ALT│L_CMD│█████│█████│█████│ SPC │█████│█████│█████│R_CMD│R_ALT│Mouse│ FNM │█████│
 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
     */
-    [_CM] = KEYMAP(
+    [_COLEMAK] = KEYMAP(
         KC_GRV,  		KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_NO,   KC_BSPC, \
         KC_TAB, 		KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_LBRC, KC_RBRC, KC_BSLS,          \
         LCTL_T(KC_ESC), KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT, KC_NO,   KC_ENT,           \
         KC_LSFT, 		KC_NO,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_NO,   KC_RSFT, KC_NO,   \
         KC_LCTL, 		KC_LALT, KC_LGUI,                            KC_SPC,                             KC_RGUI, KC_RALT, MO(5),   MO(4)),
 
-    /* Keymap 2: Qwerty Mac Mods
+    /* Qwerty Mac Mods
 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
 │ Esc │  1  │  2  │  3  │  4  │  5  │  6  │  7  │  8  │  9  │  0  │  -  │  =  │▒▒▒▒▒│BKSPC│
 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
@@ -67,31 +45,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 │LCTRL│L_ALT│L_CMD│█████│█████│█████│ SPC │█████│█████│█████│R_CMD│R_ALT│Mouse│ Fn0 │█████│
 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
      */
-	[_QM] = KEYMAP(
+	[_QWERTY] = KEYMAP(
         KC_GRV,  		KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,     KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_NO,   KC_BSPC, \
         KC_TAB,  		KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,     KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,          \
         LCTL_T(KC_ESC), KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,     KC_L,    KC_SCLN, KC_QUOT, KC_NO,   KC_ENT,           \
         KC_LSFT, 		KC_NO,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,     KC_COMM, KC_DOT,  KC_SLSH, KC_NO,   KC_RSFT, KC_NO,   \
-        KC_LCTL, 		KC_LALT, KC_LGUI,                            KC_SPC,                              KC_RGUI, KC_RALT, MO(5),   MO(4)),
-    /* Keymap 3: Qwerty Windows Mods
-┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
-│ Esc │  1  │  2  │  3  │  4  │  5  │  6  │  7  │  8  │  9  │  0  │  -  │  =  │▒▒▒▒▒│BKSPC│
-├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-│ TAB │  Q  │  W  │  E  │  R  │  T  │  Y  │  U  │  I  │  O  │  P  │  [  │  ]  │  \  │█████│
-├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-│CAPSL│  A  │  S  │  D  │  F  │  G  │  H  │  J  │  K  │  L  │  ;  │  '  │▒▒▒▒▒│ENTER│█████│
-├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-│LSHFT│▒▒▒▒▒│  Z  │  X  │  C  │  V  │  B  │  N  │  M  │  ,  │  .  │  /  │▒▒▒▒▒│RSHFT│▒▒▒▒▒│
-├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-│LCTRL│L_WIN│L_ALT│█████│█████│█████│ SPC │█████│█████│█████│R_ALT│R_WIN│Mouse│ Fn0 │█████│
-└─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
-     */
-	[_QW] = KEYMAP(
-        KC_GRV,  		KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,     KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_NO,   KC_BSPC, \
-        KC_TAB,  		KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,     KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,          \
-        LCTL_T(KC_ESC), KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,     KC_L,    KC_SCLN, KC_QUOT, KC_NO,   KC_ENT,           \
-        KC_LSFT, 		KC_NO,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,     KC_COMM, KC_DOT,  KC_SLSH, KC_NO,   KC_RSFT, KC_NO,   \
-        KC_LCTL, 		KC_LGUI, KC_LALT,                            KC_SPC,                              KC_RALT, KC_RGUI, MO(5),   MO(4)),
+        KC_LCTL, 		KC_LALT, KC_LGUI,                            KC_SPC,                              KC_RGUI, KC_RALT, MO(_MOUSE),   MO(_FN)),
     /* Overlay 4: Function Layer
 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
 │Grave│ F1  │ F2  │ F3  │ F4  │ F5  │ F6  │ F7  │ F8  │ F9  │ F10 │ F11 │ F12 │▒▒▒▒▒│ Del │
@@ -110,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_CAPS, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_PGDN, _______, _______, KC_PSCR, KC_SLCK, KC_PAUS, KC_UP,   _______, KC_INS,          \
         _______, _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, KC_HOME, KC_PGUP, KC_LEFT, KC_RGHT, _______, KC_ENT,          \
         _______, _______, KC_VOLD, KC_VOLU, KC_MUTE, _______, _______, _______, _______, KC_END,  KC_PGDN, KC_DOWN, _______, _______, _______,\
-        _______, _______, _______,                            KC_SPC,                             _______, _______, MO(6),   _______),
+        _______, _______, _______,                            KC_SPC,                             _______, _______, MO(_ADJUST),   _______),
     /* Overlay 5: Mouse mode (Semicolon/App)
 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
 │Grave│ F1  │ F2  │ F3  │ F4  │ F5  │ F6  │ F7  │ F8  │ F9  │ F10 │ F11 │ F12 │▒▒▒▒▒│BkSpc│
@@ -125,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
      * Mc: Mouse Cursor / Mb: Mouse Button / Mw: Mouse Wheel
      */
-    [_MS] = KEYMAP(
+    [_MOUSE] = KEYMAP(
         KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, KC_BSPC, \
         KC_TAB,  _______, _______, _______, _______, _______, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, _______, _______, _______, _______,          \
         _______, _______, KC_ACL0, KC_ACL1, KC_ACL2, _______, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _______, _______, _______, KC_ENT,           \
@@ -133,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______,                            KC_BTN1,                            _______, _______, _______, KC_RCTL),
     /* Overlay 6: Layout selector
 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
-│ CM  │ CW  │ QM  │ QW  │     │     │     │     │     │     │     │     │     │▒▒▒▒▒│     │
+│ CM  │ QW  │     │     │     │     │     │     │     │     │     │     │     │▒▒▒▒▒│RESET│
 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
 │     │ QM  │ QW  │     │     │     │     │     │     │     │     │     │     │     │█████│
 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
@@ -145,14 +104,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
 CM: set Mac Colemak layout (0)
 CW: set Win Colemak layout (1)
-QM: set Mac Qwerty layout  (2)
-QW: set Win Qwerty layout  (3)
     */
-    [_SL] = KEYMAP(
-    TO(0),   TO(1),   TO(2),   TO(3),   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-	_______, TO(2),   TO(3),   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          \
-	_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          \
-	_______, _______, _______, _______, TO(1),   _______, _______, _______, TO(0),   _______, _______, _______, _______, _______, _______,    \
+    [_ADJUST] = KEYMAP(
+    TO(0),   TO(1),   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RESET,  \
+	_______, TO(2),   TO(3),   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,         \
+	_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,         \
+	_______, _______, _______, _______, TO(1),   _______, _______, _______, TO(0),   _______, _______, _______, _______, _______, _______,\
 	_______, _______, _______,                            _______,                   _______, _______, _______, _______),
 };
 
