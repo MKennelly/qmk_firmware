@@ -25,7 +25,7 @@ enum preonic_layers {
   _LOWER,
   _RAISE,
   _ADJUST,
-  _NAVI,
+  _NAV,
   _NUMBER,
   _MOUSE
 };
@@ -46,8 +46,8 @@ enum preonic_keycodes {
 #define ALT_TAB LALT_T(KC_TAB)
 #define SFT_GRV LSFT_T(KC_GRV)
 #define ENT_GUI RGUI_T(KC_ENT)
-#define SPC_NAV LT(_NAVI, KC_SPC)
-#define ENT_NAV LT(_NAVI, KC_ENT)
+#define SPC_NAV LT(_NAV, KC_SPC)
+#define ENT_NAV LT(_NAV, KC_ENT)
 #define NUMBER MO(_NUMBER)
 #define MOUSE MO(_MOUSE)
 
@@ -70,8 +70,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
   {ALT_TAB, KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,   KC_J,   KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC},
   {CTL_ESC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,   KC_H,   KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT},
-  {SFT_GRV,	KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_K,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, ENT_NAV},
-  {KC_LCAG,	NUMBER,  KC_LALT, KC_LGUI, KC_LSFT, LOWER,  RAISE,  SPC_NAV, KC_LEAD, KC_DOWN, KC_UP,   KC_RGHT}
+  {SFT_GRV,	KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_K,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, ENT_GUI},
+  {KC_LCAG,	MOUSE,   KC_LALT, KC_LGUI, KC_LSFT, LOWER,  RAISE,  SPC_NAV, KC_LEAD, KC_DOWN, KC_UP,   KC_RGHT}
 },
 
 /* Qwerty
@@ -91,8 +91,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
   {ALT_TAB, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
   {CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
-  {SFT_GRV,	KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, ENT_NAV},
-  {KC_LCAG,	NUMBER,  KC_LALT, KC_LGUI, KC_LSFT, LOWER,   RAISE,   SPC_NAV, KC_LEAD, KC_DOWN, KC_UP,   KC_RGHT}
+  {SFT_GRV,	KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, ENT_GUI},
+  {KC_LCAG,	MOUSE,   KC_LALT, KC_LGUI, KC_LSFT, LOWER,   RAISE,   SPC_NAV, KC_LEAD, KC_DOWN, KC_UP,   KC_RGHT}
 },
 
 /* Lower - Numbers
@@ -137,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {_______, _______, _______, _______, KC_SPC,  _______, _______, _______, _______, _______, _______, _______}
 },
 
-/* NAVI - Control/nav
+/* NAV - Control/nav
  * ,-----------------------------------------------------------------------------------.
  * |XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|XXXXXX|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -150,7 +150,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |      |      |      | Prev | Play | Next | Stop |
  * `-----------------------------------------------------------------------------------'
  */
-[_NAVI] = {
+[_NAV] = {
   {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
   {_______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_PGDN, XXXXXXX, XXXXXXX, KC_UP,   XXXXXXX, XXXXXXX, KC_DEL},
   {_______, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, _______},
@@ -176,7 +176,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {_______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,   KC_9,   KC_0,    _______},
   {_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PAST, KC_4,    KC_5,   KC_6,   KC_PMNS, _______},
   {_______, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX, KC_PSLS, KC_1,    KC_2,   KC_3,   KC_PPLS, _______},
-  {MOUSE,   _______, _______, _______, _______, _______, _______, _______, KC_0,   KC_DOT, KC_EQL,  XXXXXXX}
+  {_______, _______, _______, _______, _______, _______, _______, _______, KC_0,   KC_DOT, KC_EQL,  XXXXXXX}
 },
 
 /* MOUSE - mouse/left nav
@@ -196,8 +196,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
   {_______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_PGDN, KC_WH_D, KC_BTN1, KC_MS_U, KC_BTN2, XXXXXXX, _______},
   {_______, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, KC_WH_U, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX, _______},
-  {_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_WH_L, KC_BTN3, KC_WH_R, XXXXXXX, _______},
-  {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
+  {_______, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX, XXXXXXX, KC_WH_L, KC_BTN3, KC_WH_R, XXXXXXX, _______},
+  {NUMBER,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
 
 /* Adjust (Lower + Raise)
