@@ -37,6 +37,7 @@ enum preonic_keycodes {
   RAISE,
   FAT_ARW,
   SLM_ARW,
+  PIPE_OP,
 };
 
 #define _______ KC_TRNS
@@ -124,7 +125,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |XXXXXX|  [   |  {   |  (   |  -   |   =  |   )  |  }   |  ]   |  \   |  |   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |XXXXXX|XXXXXX|XXXXXX|XXXXXX|  _   |   +  |XXXXXX|  ->  |  =>  |XXXXXX|XXXXXX|
+ * |      |XXXXXX|XXXXXX|XXXXXX|XXXXXX|  _   |   +  |XXXXXX|  ->  |  =>  |  |>  |XXXXXX|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
@@ -133,7 +134,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
   {_______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______},
   {_______, XXXXXXX, KC_LBRC, KC_LCBR, KC_LPRN, KC_MINS, KC_EQL,  KC_RPRN, KC_RCBR, KC_RBRC, KC_BSLS, KC_PIPE},
-  {_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_UNDS, KC_PLUS, XXXXXXX, SLM_ARW, FAT_ARW, XXXXXXX, _______},
+  {_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_UNDS, KC_PLUS, XXXXXXX, SLM_ARW, FAT_ARW, PIPE_OP, _______},
   {_______, _______, _______, _______, KC_SPC,  _______, _______, _______, _______, _______, _______, _______}
 },
 
@@ -296,6 +297,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case SLM_ARW:
       if (record->event.pressed) {
         SEND_STRING("-> ");
+      }
+      return false;
+      break;
+    case PIPE_OP:
+      if (record->event.pressed) {
+        SEND_STRING("|> ");
       }
       return false;
       break;
