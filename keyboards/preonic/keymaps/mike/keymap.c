@@ -302,13 +302,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case FAT_ARW:
       if (record->event.pressed) {
-        SEND_STRING("=> ");
+        SEND_STRING(" => ");
       }
       return false;
       break;
     case SLM_ARW:
       if (record->event.pressed) {
-        SEND_STRING("-> ");
+        SEND_STRING(" -> ");
       }
       return false;
       break;
