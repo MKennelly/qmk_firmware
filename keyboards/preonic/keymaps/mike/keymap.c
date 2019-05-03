@@ -38,7 +38,10 @@ enum preonic_keycodes {
   FAT_ARW,
   SLM_ARW,
   PIPE_OP,
+  DYNAMIC_MACRO_RANGE,
 };
+
+#include "dynamic_macro.h"
 
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
@@ -51,6 +54,12 @@ enum preonic_keycodes {
 #define ENT_NAV LT(_NAV, KC_ENT)
 #define NUMBER MO(_NUMBER)
 #define MOUSE MO(_MOUSE)
+
+#define DM_STOP DYN_REC_STOP
+#define DM1_REC DYN_REC_START1
+#define DM2_REC DYN_REC_START2
+#define DM1_PLY DYN_MACRO_PLAY1
+#define DM2_PLY DYN_MACRO_PLAY2
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Colemak
@@ -209,7 +218,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |      |      |Aud on|AudOff|AGnorm|AGswap|Colemk|Qwerty|      |      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |      |DM1REC|DM1PLY|DM2REC|DM2PLY|DMSTOP|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
@@ -218,7 +227,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12},
   {_______, RESET,   DEBUG,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TERM_ON, TERM_OFF,XXXXXXX, XXXXXXX, KC_SLEP},
   {_______, XXXXXXX, XXXXXXX, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, COLEMAK, QWERTY,  XXXXXXX, XXXXXXX, _______},
-  {_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______},
+  {_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DM1_REC, DM1_PLY, DM2_REC, DM2_PLY, DM_STOP},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 }
 };
@@ -255,6 +264,9 @@ void matrix_scan_user(void) {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (!process_record_dynamic_macro(keycode, record)) {
+    return false;
+  }
   switch (keycode) {
     case COLEMAK:
       if (record->event.pressed) {
