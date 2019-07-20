@@ -107,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
      SFTGRV,     Z,     X,     C,     V,     B,                      N,     M,  COMM,   DOT,  SLSH,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                   LGUI,  LSFT, LOWER,    RAISE,SPCNAV,LDSUPR \
+                                   LGUI,  LSFT, LOWER,    RAISE,SPCNAV,  LEAD \
                               //`--------------------'  `--------------------'
   ),
 

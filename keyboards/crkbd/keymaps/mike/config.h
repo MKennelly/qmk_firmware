@@ -33,7 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define USE_SERIAL_PD2
 
 #undef RGBLED_NUM
-#define RGBLIGHT_ANIMATIONS
+// #define RGBLIGHT_ANIMATIONS
 #define RGBLED_NUM 27
 #define RGBLIGHT_LIMIT_VAL 120
 #define RGBLIGHT_HUE_STEP 10
@@ -43,6 +43,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Saving space for leader key mode
 #define NO_ACTION_ONESHOT
 #define NO_MUSIC_MODE
+// from thomas baart guide
+#ifndef NO_DEBUG
+#define NO_DEBUG
+#endif // !NO_DEBUG
+#if !defined(NO_PRINT) && !defined(CONSOLE_ENABLE)
+#define NO_PRINT
+#endif // !NO_PRINT
 
 // Helps fix issue with having nav layer on space bar
 #define TAPPING_FORCE_HOLD
